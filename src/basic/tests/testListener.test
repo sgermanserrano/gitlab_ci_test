@@ -1,0 +1,8 @@
+<launch>
+  <include file="$(find basic)/launch/listener.launch">
+  </include>
+  
+  <test test-name="test-listener-node" pkg="basic" type="test_listener_node" name="test_listener_node">
+  </test>
+  
+</launch>

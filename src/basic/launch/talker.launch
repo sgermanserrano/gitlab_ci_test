@@ -1,0 +1,4 @@
+<launch>
+  <node name="talker_node" pkg="basic" type="talker_node">
+  </node>
+</launch>
