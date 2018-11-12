@@ -32,6 +32,8 @@ build:
     - wstool up
     - cd ..
     - rosdep install -y --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} 
+    - echo $CI_PROJECT_DIR
+    - echo $ROS_HOME
   script:
     - catkin_make --cmake-args -DCOVERAGE=ON -DCMAKE_BUILD_TYPE=Debug
     - lcov --initial --directory build --capture --output-file lcov.base
