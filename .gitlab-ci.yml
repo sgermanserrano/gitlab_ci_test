@@ -36,6 +36,7 @@ build:
     - echo $ROS_HOME
   script:
     - catkin_make --cmake-args -DCOVERAGE=ON -DCMAKE_BUILD_TYPE=Debug
+    - echo $ROS_HOME
     - lcov --initial --directory build --capture --output-file lcov.base
     - catkin_make run_tests
     - lcov --directory build --capture --output-file lcov.test
