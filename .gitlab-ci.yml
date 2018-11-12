@@ -45,8 +45,6 @@ build:
     paths:
       - coverage.tar.gz
     expire_in: 20 mins
-  only:
-    - merge-requests
          
 pages:
   stage: deploy
