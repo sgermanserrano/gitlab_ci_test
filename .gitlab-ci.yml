@@ -44,7 +44,7 @@ build:
   artifacts:
     paths:
       - coverage.tar.gz
-    expire_in: 20 mins
+    expire_in: 20 mins 
          
 pages:
   stage: deploy
