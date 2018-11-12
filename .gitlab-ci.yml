@@ -15,6 +15,7 @@ variables:
 build:
   stage: build
   before_script:
+    - echo $HOME
     - apt-get update
     - apt-get install -y lsb-release lcov
     - apt-get install -y gcc g++
