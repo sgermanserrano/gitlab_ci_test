@@ -58,6 +58,7 @@ pages:
   script:
     - tar -xzvf coverage.tar.gz
     - echo $CI_COMMIT_REF_NAME
+    - ls public
     - mv coverage public
   artifacts:
     name: "$CI_JOB_NAME"
