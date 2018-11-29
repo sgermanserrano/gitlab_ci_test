@@ -62,7 +62,7 @@ pages:
     name: $CI_JOB_NAME
     paths:
       - public
-    only:
-      - master
+  only:
+    - master
     
 
