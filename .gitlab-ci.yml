@@ -45,6 +45,7 @@ build:
     - lcov -r lcov.total 'tests/*' '/usr/*' '/opt/*' '*/CMakeCCompilerId.c' '*/CMakeCXXCompilerId.cpp' -o lcov.total.filtered
     - genhtml -p "$PWD" --legend --demangle-cpp lcov.total.filtered -o coverage_$CI_COMMIT_REF_NAME
     - tar -czvf coverage_$CI_COMMIT_REF_NAME.tar.gz coverage_$CI_COMMIT_REF_NAME
+    - ./docs/add_branch_coverage.sh $CI_COMMIT_REF_NAME
   artifacts:
     paths:
       - coverage_$CI_COMMIT_REF_NAME.tar.gz
@@ -57,7 +58,8 @@ pages:
     - build
   script:
     - tar -xzvf coverage_$CI_COMMIT_REF_NAME.tar.gz
-    - mv coverage_$CI_COMMIT_REF_NAME public
+    - mkdir -p public/$CI_COMMIT_REF_NAME
+    - mv coverage_$CI_COMMIT_REF_NAME public/$CI_COMMIT_REF_NAME
   artifacts:
     name: $CI_JOB_NAME
     paths:
