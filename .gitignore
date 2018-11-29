@@ -1,4 +1,5 @@
 /build
 /devel
 /install
+/public
 .catkin_workspace

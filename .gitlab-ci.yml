@@ -43,12 +43,11 @@ build:
     - lcov --directory build --capture --output-file lcov.test
     - lcov -a lcov.base -a lcov.test -o lcov.total
     - lcov -r lcov.total 'tests/*' '/usr/*' '/opt/*' '*/CMakeCCompilerId.c' '*/CMakeCXXCompilerId.cpp' -o lcov.total.filtered
-    - genhtml -p "$PWD" --legend --demangle-cpp lcov.total.filtered -o coverage
-    - tar -czvf coverage.$CI_COMMIT_REF_NAME.tar.gz coverage
+    - genhtml -p "$PWD" --legend --demangle-cpp lcov.total.filtered -o coverage_$CI_COMMIT_REF_NAME
+    - tar -czvf coverage_$CI_COMMIT_REF_NAME.tar.gz coverage_$CI_COMMIT_REF_NAME
   artifacts:
     paths:
-      - coverage.$CI_COMMIT_REF_NAME.tar.gz
-    expire_in: 20 mins
+      - coverage_$CI_COMMIT_REF_NAME.tar.gz
          
 pages:
   stage: deploy
@@ -56,7 +55,7 @@ pages:
   dependencies:
     - build
   script:
-    - tar -xzvf coverage.$CI_COMMIT_REF_NAME.tar.gz
+    - tar -xzvf coverage_$CI_COMMIT_REF_NAME.tar.gz
     - echo $CI_COMMIT_REF_NAME
     - mkdir -p public/$CI_COMMIT_REF_NAME
     - ls public
