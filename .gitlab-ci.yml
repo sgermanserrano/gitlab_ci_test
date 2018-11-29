@@ -60,7 +60,7 @@ pages:
     - echo $CI_COMMIT_REF_NAME
     - mkdir -p public/$CI_COMMIT_REF_NAME
     - ls public
-    - mv coverage.$CI_COMMIT_REF_NAME public/$CI_COMMIT_REF_NAME
+    - mv coverage public/$CI_COMMIT_REF_NAME
   artifacts:
     name: "$CI_JOB_NAME"
     paths:
