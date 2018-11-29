@@ -57,12 +57,9 @@ pages:
     - build
   script:
     - tar -xzvf coverage_$CI_COMMIT_REF_NAME.tar.gz
-    - mv coverage public
+    - mv coverage_$CI_COMMIT_REF_NAME public
   artifacts:
     name: $CI_JOB_NAME
     paths:
       - public
-  only:
-    - master
-    
 
