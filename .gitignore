@@ -2,3 +2,4 @@
 /devel
 /install
 .catkin_workspace
+/.metadata/
