@@ -49,6 +49,7 @@ build:
     - genhtml -p "$PWD" --legend --demangle-cpp lcov.total.filtered -o $COVERAGE_REF_NAME
     - mkdir public
     - tar -czvf $COVERAGE_REF_NAME.tar.gz $COVERAGE_REF_NAME
+    - ls
   artifacts:
     paths:
       - $COVERAGE_REF_NAME.tar.gz
