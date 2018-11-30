@@ -48,11 +48,11 @@ build:
     - echo $COMMIT_REF_NAME
     - genhtml -p "$PWD" --legend --demangle-cpp lcov.total.filtered -o $COVERAGE_REF_NAME
     - mkdir public
-    - tar -czvf $COVERAGE_REF_NAME.tar.gz $COVERAGE_REF_NAME
+    - tar -czvf coverage.tar.gz $COVERAGE_REF_NAME
     - ls
   artifacts:
     paths:
-      - $COVERAGE_REF_NAME.tar.gz
+      - coverage.tar.gz
         
 pages:
   stage: deploy
@@ -62,7 +62,7 @@ pages:
   script:
     - COMMIT_REF_NAME="$(echo $CI_COMMIT_REF_NAME | sed 's/\//_/g')"
     - COVERAGE_REF_NAME="coverage_$COMMIT_REF_NAME"
-    - tar -xzvf $COVERAGE_REF_NAME.tar.gz
+    - tar -xzvf coverage.tar.gz
     - mv $COVERAGE_REF_NAME public
   artifacts:
     name: $CI_JOB_NAME
