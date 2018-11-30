@@ -51,7 +51,7 @@ build:
     - tar -czvf $COVERAGE_REF_NAME.tar.gz $COVERAGE_REF_NAME
   artifacts:
     paths:
-      - $COMMIT_REF_NAME.tar.gz
+      - $COVERAGE_REF_NAME.tar.gz
         
 pages:
   stage: deploy
