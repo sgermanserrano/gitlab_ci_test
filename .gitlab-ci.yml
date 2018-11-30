@@ -44,6 +44,7 @@ build:
     - lcov -a lcov.base -a lcov.test -o lcov.total
     - lcov -r lcov.total 'tests/*' '/usr/*' '/opt/*' '*/CMakeCCompilerId.c' '*/CMakeCXXCompilerId.cpp' -o lcov.total.filtered
     - COMMIT_REF_NAME="$(echo $CI_COMMIT_REF_NAME | sed 's/\//_/g')"
+    - echo $COMMIT_REF_NAME
     - genhtml -p "$PWD" --legend --demangle-cpp lcov.total.filtered -o coverage_$COMMIT_REF_NAME
     - mkdir public
     - tar -czvf coverage_$COMMIT_REF_NAME.tar.gz coverage_$COMMIT_REF_NAME
