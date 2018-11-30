@@ -11,11 +11,14 @@ variables:
   CATKIN_OPTIONS: $CI_SOURCE_PATH/catkin.options
   PYTHONPATH: ${PYTHONPATH}:/usr/lib/python2.7/dist-packages:/usr/local/lib/python2.7/dist-packages
   ROS_DISTRO: kinetic
-  
+  COMMIT_REF_NAME: $(echo $CI_COMMIT_REF_NAME | sed 's/\//_/g')
+  COVERAGE_REF_NAME: coverage_$COMMIT_REF_NAME
+    
 build:
   stage: build
   before_script:
-    - echo $HOME
+    - echo $COMMIT_REF_NAME
+    - echo $COVERAGE_REF_NAME
     - apt-get update
     - apt-get install -y lsb-release lcov
     - apt-get install -y gcc g++
@@ -43,14 +46,12 @@ build:
     - lcov --directory build --capture --output-file lcov.test
     - lcov -a lcov.base -a lcov.test -o lcov.total
     - lcov -r lcov.total 'tests/*' '/usr/*' '/opt/*' '*/CMakeCCompilerId.c' '*/CMakeCXXCompilerId.cpp' -o lcov.total.filtered
-    - COMMIT_REF_NAME="$(echo $CI_COMMIT_REF_NAME | sed 's/\//_/g')"
-    - echo $COMMIT_REF_NAME
-    - genhtml -p "$PWD" --legend --demangle-cpp lcov.total.filtered -o coverage_$COMMIT_REF_NAME
+    - genhtml -p "$PWD" --legend --demangle-cpp lcov.total.filtered -o $COVERAGE_REF_NAME
     - mkdir public
-    - tar -czvf coverage_$COMMIT_REF_NAME.tar.gz coverage_$COMMIT_REF_NAME
+    - tar -czvf $COVERAGE_REF_NAME.tar.gz $COVERAGE_REF_NAME
   artifacts:
     paths:
-      - coverage_$COMMIT_REF_NAME.tar.gz
+      - $COMMIT_REF_NAME.tar.gz
         
 pages:
   stage: deploy
@@ -58,8 +59,8 @@ pages:
   dependencies:
     - build
   script:
-    - tar -xzvf coverage_$COMMIT_REF_NAME.tar.gz
-    - mv coverage_$COMMIT_REF_NAME public
+    - tar -xzvf $COVERAGE_REF_NAME.tar.gz
+    - mv $COVERAGE_REF_NAME public
   artifacts:
     name: $CI_JOB_NAME
     paths:
