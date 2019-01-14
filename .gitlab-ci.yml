@@ -53,7 +53,18 @@ build:
   artifacts:
     paths:
       - coverage.tar.gz
-        
+
+docker-image:
+  stage: deploy
+  image: docker
+  services:
+    - docker:dind
+  script:
+    - echo $DOCKERHUB_USER
+    - echo $DOCKERHUB_PASS
+    - echo $DOCKERHUB_URL
+    
+   
 pages:
   stage: deploy
   image: alpine
