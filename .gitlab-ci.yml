@@ -63,6 +63,9 @@ docker-image:
     - echo $DOCKERHUB_USER
     - echo $DOCKERHUB_PASS
     - echo $DOCKERHUB_URL
+    - docker login -u "$DOCKERHUB_USER" -p "$DOCKERHUB_PASS" $DOCKERHUB_URL
+    - docker build --t "test_image" -f ./Dockerfile/Dockerfile.test .
+    - docker push "test_image"
     
    
 pages:
