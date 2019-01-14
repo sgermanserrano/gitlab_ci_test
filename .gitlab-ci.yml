@@ -67,6 +67,8 @@ docker-image:
     - docker build -t "$DOCKERHUB_USER/test_image" -f ./Dockerfile/Dockerfile.test .
     - docker image ls
     - docker push "$DOCKERHUB_USER/test_image"
+  only:
+    - release*
     
 pages:
   stage: deploy
