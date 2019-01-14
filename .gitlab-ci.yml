@@ -68,7 +68,7 @@ docker-image:
     - docker image ls
     - docker push "$DOCKERHUB_USER/test_image"
   only:
-    - release/*
+    - /^release.*$/
     
 pages:
   stage: deploy
