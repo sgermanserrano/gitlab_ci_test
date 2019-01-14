@@ -67,7 +67,6 @@ docker-image:
     - docker build --t "test_image" -f ./Dockerfile/Dockerfile.test .
     - docker push "test_image"
     
-   
 pages:
   stage: deploy
   image: alpine
