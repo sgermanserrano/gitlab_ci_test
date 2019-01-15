@@ -60,6 +60,7 @@ docker-image:
   services:
     - docker:dind
   script:
+    - ./get_docker_image_name.sh $CI_COMMIT_TAG $CI_COMMIT_REF_NAME
     - echo $DOCKERHUB_USER
     - echo $DOCKERHUB_PASS
     - echo $DOCKERHUB_URL
@@ -69,6 +70,7 @@ docker-image:
     - docker push "$DOCKERHUB_USER/test_image"
   only:
     - /^release.*$/
+    - tags
     
 pages:
   stage: deploy
