@@ -6,9 +6,10 @@ CI_COMMIT_REF_NAME=$2
 echo $CI_COMMIT_TAG
 echo $CI_COMMIT_REF_NAME
 
-if [ -z "$1" ]
+if [ -z "$CI_COMMIT_TAG" ]
 then
-      echo "\$var is empty"
+      
+      echo "$CI_COMMIT_TAG"
 else
-      echo "\$var is NOT empty"
+      echo "${CI_COMMIT_REF_NAME:8:10}"
 fi
