@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# $IMAGE_NAME var is injected into the build so the tag is correct.
+echo "[***] Build hook running"
+
+# Build cpu dependencies
+docker pull sgerman/gitlab_ci_test:blah
+
+BASE=$IMAGE_NAME
+docker build -t $BASE -f Dockerfile.test .
+docker push $BASE
